@@ -23,9 +23,9 @@ public class Ternary_Operator {
         *         F: 0-59  ->   59 <=
         * */
         float score = 60.356f;  //input
-        char grade = 'F';  //output
 
-        grade = (score >= 60 && score <=69) ? 'D' : (score >= 70 && score <=79) ? 'C': (score >= 80 && score <=89) ? 'B' : (score >= 90 && score <=100) ? 'A': 'F';
+
+        char grade = (score >= 60 && score <=69) ? 'D' : (score >= 70 && score <=79) ? 'C': (score >= 80 && score <=89) ? 'B' : (score >= 90 && score <=100) ? 'A': 'F';
         //res=(num1>num2) ? (num1+num2):(num1-num2)
         System.out.println(grade);
 
