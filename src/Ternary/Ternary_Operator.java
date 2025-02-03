@@ -8,7 +8,7 @@ Problem:  Write a program that calculates and displays the letter grade for a gi
                     A: 90-100 B: 80-89 C: 70-79 D: 60-69 F: 0-59
                     variable = Expression1 ? Expression2: Expression3
 */
-package Interview;
+package Ternary;
 
 public class Ternary_Operator {
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Ternary_Operator {
         *         D: 60-69  ->  69 <= && <=60
         *         F: 0-59  ->   59 <=
         * */
-        float score = 60.356f;  //input
+        float score = 68.356f;  //input
 
 
         char grade = (score >= 60 && score <=69) ? 'D' : (score >= 70 && score <=79) ? 'C': (score >= 80 && score <=89) ? 'B' : (score >= 90 && score <=100) ? 'A': 'F';
