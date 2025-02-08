@@ -33,7 +33,7 @@ Marks Range Grade
                 System.out.println("D");
             } else if (marks >= 50 && marks <= 59) {
                 System.out.println("E");
-            } else System.out.println("No Grade: Fail");
+            } else System.out.println("Fail");
         }else System.out.println("Enter Marks between 0-100");
     }
 }
