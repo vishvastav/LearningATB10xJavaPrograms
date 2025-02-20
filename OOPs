@@ -1,0 +1,247 @@
+# Object-Oriented Programming Concepts in Java
+
+## Q1: What is Inheritance?
+**A:** Inheritance is a mechanism where a new class (child) can inherit properties and behaviors from an existing class (parent). This allows for code reuse and establishing a relationship between classes.
+
+**Example:** A Vehicle class can be inherited by Car and Motorcycle classes.
+
+```java
+// Parent class
+class Vehicle {
+    private String brand;
+    private int year;
+    
+    public Vehicle(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+    
+    public void displayInfo() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Year: " + year);
+    }
+}
+
+// Child class inheriting from Vehicle
+class Car extends Vehicle {
+    private int numDoors;
+    
+    public Car(String brand, int year, int numDoors) {
+        super(brand, year);  // Call parent constructor
+        this.numDoors = numDoors;
+    }
+    
+    // Override parent method
+    @Override
+    public void displayInfo() {
+        super.displayInfo();  // Call parent method
+        System.out.println("Number of doors: " + numDoors);
+    }
+}
+
+public class InheritanceExample {
+    public static void main(String[] args) {
+        Car myCar = new Car("Toyota", 2022, 4);
+        myCar.displayInfo();
+    }
+}
+
+```
+
+## Q2: What is Encapsulation?
+**A:** Encapsulation is the bundling of data (attributes) and methods that operate on the data within a single unit (class), while restricting direct access to some of the object's components. This is done using access modifiers like private, protected, and public.
+
+**Example:** A BankAccount class encapsulates account details and operations.
+
+```java
+class BankAccount {
+    // Private fields - hidden from outside world
+    private double balance;
+    private String accountNumber;
+    
+    // Constructor
+    public BankAccount(String accountNumber, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.balance = initialBalance;
+    }
+    
+    // Public methods to access and modify private fields
+    public double getBalance() {
+        return balance;
+    }
+    
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+    
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        }
+    }
+    
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Insufficient funds or invalid amount");
+        }
+    }
+}
+
+public class EncapsulationExample {
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("12345", 1000);
+        
+        // We can't access account.balance directly (it's private)
+        // account.balance = 2000; // This would cause a compilation error
+        
+        // We must use the public methods
+        account.deposit(500);
+        System.out.println("Balance: $" + account.getBalance());
+        account.withdraw(200);
+        System.out.println("Balance: $" + account.getBalance());
+    }
+}
+
+```
+
+## Q3: What is Abstraction?
+**A:** Abstraction means hiding complex implementation details and showing only the necessary features of an object. It lets you focus on what an object does instead of how it does it.
+
+**Example:** A RemoteControl interface abstracts the operations that any remote control should have.
+
+```java
+// Abstract class with both abstract and concrete methods
+abstract class RemoteControl {
+    // Abstract method (no implementation)
+    public abstract void powerOn();
+    public abstract void powerOff();
+    
+    // Concrete method (with implementation)
+    public void showBatteryLife() {
+        System.out.println("Battery: 70%");
+    }
+}
+
+// Concrete class implementing the abstract class
+class TVRemote extends RemoteControl {
+    @Override
+    public void powerOn() {
+        System.out.println("TV turned on");
+    }
+    
+    @Override
+    public void powerOff() {
+        System.out.println("TV turned off");
+    }
+}
+
+public class AbstractionExample {
+    public static void main(String[] args) {
+        // Cannot instantiate the abstract class
+        // RemoteControl remote = new RemoteControl(); // This would cause error
+        
+        // Use the concrete implementation
+        RemoteControl remote = new TVRemote();
+        remote.powerOn();
+        remote.showBatteryLife();
+        remote.powerOff();
+    }
+}
+
+```
+
+## Q4: What is Polymorphism?
+**A:** Polymorphism means "many forms" and it allows objects of different classes to be treated as objects of a common superclass. The most common use is when a parent class reference is used to refer to a child class object.
+
+**Example:** Multiple shapes can have different implementations of an area calculation method.
+
+```java
+// Parent class
+class Shape {
+    public double calculateArea() {
+        return 0;  // Default implementation
+    }
+    
+    public void displayArea() {
+        System.out.println("Area: " + calculateArea());
+    }
+}
+
+// Child classes with their own implementations
+class Circle extends Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double width;
+    
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+    
+    @Override
+    public double calculateArea() {
+        return length * width;
+    }
+}
+
+public class PolymorphismExample {
+    public static void main(String[] args) {
+        // Polymorphism in action
+        Shape shape1 = new Circle(5);
+        Shape shape2 = new Rectangle(4, 6);
+        
+        // Same method call, different behaviors
+        shape1.displayArea();  // Will calculate circle area
+        shape2.displayArea();  // Will calculate rectangle area
+        
+        // Polymorphism with array
+        Shape[] shapes = {new Circle(3), new Rectangle(5, 4), new Circle(7)};
+        for (Shape shape : shapes) {
+            shape.displayArea();  // Each shape calculates area differently
+        }
+    }
+}
+
+```
+
+## Q5: How is Abstraction different from Encapsulation?
+**A:** 
+- **Abstraction** focuses on hiding the complexity and showing only essential features. It's about "what" an object does.
+- **Encapsulation** focuses on wrapping data and methods into a single unit and preventing direct access to data. It's about "how" an object does something.
+
+**Simple comparison:**
+- Abstraction: Hiding implementation details (like a TV remote - you press buttons without knowing the internal circuitry)
+- Encapsulation: Binding data and methods together and restricting direct access (like a medicine capsule - ingredients are wrapped inside)
+
+## Q6: What is the difference between an abstract class and an interface?
+
+**A:**
+
+| Abstract Class | Interface |
+|----------------|-----------|
+| Can have both abstract and concrete methods | Traditionally only has abstract methods (before Java 8) |
+| Can have instance variables, constructors | Can only have constants (public static final variables) |
+| A class can extend only one abstract class | A class can implement multiple interfaces |
+| Can have access modifiers for methods | Methods are implicitly public and abstract |
+| Use when there's a "is-a" relationship | Use when there's a "can-do" relationship |
+| Example: Animal as abstract class, Dog extends Animal | Example: Swimmer interface, both Duck and Human can implement it |
+
+**Simple explanation:** 
+- An abstract class is like a partially built house with some rooms finished and others left for you to complete.
+- An interface is like a blueprint that only shows what rooms you must build, but doesn't provide any actual construction.
