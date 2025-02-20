@@ -527,3 +527,48 @@ The constructor takes parameters, uses `this` keyword to distinguish instance va
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Program 3 : Can you overload constructors in Java? Give one example, Write a code for that.
+Yes, you can overload constructors in Java. Constructor overloading is when a class has multiple constructors with different parameter lists.
+
+This example shows a Student class with three overloaded constructors:
+
+A default constructor with no parameters
+A constructor that accepts just the name
+A constructor that accepts name, age, and ID
+Each constructor initializes the object differently based on the provided parameters.
+
+public class Student {
+    private String name;
+    private int age;
+    private String id;
+    
+    // Default constructor
+    public Student() {
+        this.name = "Unknown";
+        this.age = 18;
+        this.id = "N/A";
+    }
+    
+    // Constructor with name only
+    public Student(String name) {
+        this.name = name;
+        this.age = 18;
+        this.id = "N/A";
+    }
+    
+    // Constructor with all fields
+    public Student(String name, int age, String id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+    
+    public static void main(String[] args) {
+        Student s1 = new Student();                       // Uses default constructor
+        Student s2 = new Student("Alice");                // Uses constructor with name only
+        Student s3 = new Student("Bob", 20, "B12345");    // Uses constructor with all parameters
+        
+        System.out.println("Created three students using different constructors");
+    }
+}
+
+
