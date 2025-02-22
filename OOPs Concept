@@ -1,0 +1,259 @@
+### 1) Method Overloading
+
+What it is: Method overloading means creating multiple methods with the same name but different parameters (different number or types of inputs).
+
+Example: Think of a calculator that has different ways to add numbers:
+
+- You can add two numbers
+
+- You can add three numbers
+
+- You can add a whole number and a decimal number
+
+Here's a simple program:
+
+```java
+
+class Calculator {
+
+    // Method to add two integers
+
+    int add(int a, int b) {
+
+        return a + b;
+
+    }
+
+    
+
+    // Method to add three integers
+
+    int add(int a, int b, int c) {
+
+        return a + b + c;
+
+    }
+
+    
+
+    // Method to add two doubles
+
+    double add(double a, double b) {
+
+        return a + b;
+
+    }
+
+}
+
+public class OverloadingExample {
+
+    public static void main(String[] args) {
+
+        Calculator calc = new Calculator();
+
+        
+
+        System.out.println("Adding 2 integers: " + calc.add(5, 10));
+
+        System.out.println("Adding 3 integers: " + calc.add(5, 10, 15));
+
+        System.out.println("Adding 2 doubles: " + calc.add(5.5, 10.5));
+
+    }
+
+}
+
+```
+
+### 2) Method Overriding
+
+What it is: Method overriding happens when a child class provides a specific implementation for a method that is already defined in its parent class.
+
+Example: Think of an Animal class with a makeSound() method. Different animals will make different sounds, so each animal class can override this method.
+
+```java
+
+class Animal {
+
+    void makeSound() {
+
+        System.out.println("Animal makes a sound");
+
+    }
+
+}
+
+class Dog extends Animal {
+
+    // Override the parent class method
+
+    @Override
+
+    void makeSound() {
+
+        System.out.println("Dog barks: Woof! Woof!");
+
+    }
+
+}
+
+class Cat extends Animal {
+
+    // Override the parent class method
+
+    @Override
+
+    void makeSound() {
+
+        System.out.println("Cat meows: Meow!");
+
+    }
+
+}
+
+public class OverridingExample {
+
+    public static void main(String[] args) {
+
+        Animal myAnimal = new Animal();
+
+        Animal myDog = new Dog();
+
+        Animal myCat = new Cat();
+
+        
+
+        myAnimal.makeSound();  // Outputs: Animal makes a sound
+
+        myDog.makeSound();     // Outputs: Dog barks: Woof! Woof!
+
+        myCat.makeSound();     // Outputs: Cat meows: Meow!
+
+    }
+
+}
+
+```
+
+### 3) Difference between Inheritance and Polymorphism
+
+Inheritance:
+
+- It's about creating new classes (child classes) that are built upon existing classes (parent classes)
+
+- It lets you reuse code from parent classes
+
+- It's like saying "A dog IS AN animal" - the child class inherits properties from the parent
+
+Polymorphism:
+
+- Means "many forms" - the ability of an object to take on many forms
+
+- It allows you to perform a single action in different ways
+
+- Two main types: Method Overloading (compile-time) and Method Overriding (runtime)
+
+- It's like having a remote control that works differently depending on which device you're controlling
+
+### 4) Difference between Method Overloading and Method Overriding
+
+| Method Overloading | Method Overriding |
+
+|-------------------|-------------------|
+
+| Same method name but different parameters | Same method name and same parameters |
+
+| Happens in the same class | Happens in parent and child classes |
+
+| Decided at compile time | Decided at runtime |
+
+| Return type can be different | Return type must be the same or a subtype |
+
+| It's about providing different ways to call the same method | It's about providing a specific implementation in the child class |
+
+### 5) Can we override static methods?
+
+No, we cannot override static methods. This is called method hiding, not overriding.
+
+Static methods belong to the class, not to objects. They are resolved at compile time based on the reference type, not the object type.
+
+### 6) What is the super keyword, and how is it used in Java?
+
+The `super` keyword refers to the parent class. It is used to:
+
+1. Call the parent class constructor: `super()`
+
+2. Call the parent class methods: `super.methodName()`
+
+3. Access parent class variables: `super.variableName`
+
+Example:
+
+```java
+
+class Parent {
+
+    void display() {
+
+        System.out.println("Parent's display method");
+
+    }
+
+}
+
+class Child extends Parent {
+
+    void display() {
+
+        super.display();  // Call parent's display method
+
+        System.out.println("Child's display method");
+
+    }
+
+}
+
+```
+
+### 7) Can you override a static method in Java? Why or why not?
+
+No, you cannot override static methods in Java.
+
+Why not?
+
+- Static methods belong to the class, not to objects
+
+- Method overriding is based on dynamic binding at runtime
+
+- Static methods are bound at compile time (static binding)
+
+- When you define a static method with the same signature in a child class, it's called "method hiding," not overriding
+
+```java
+
+class Parent {
+
+    static void show() {
+
+        System.out.println("Static method in Parent");
+
+    }
+
+}
+
+class Child extends Parent {
+
+    // This is method hiding, not overriding
+
+    static void show() {
+
+        System.out.println("Static method in Child");
+
+    }
+
+}
+
+```
+
+If you call these methods, which version executes depends on the reference type, not the object type (unlike with overriding).
