@@ -1,12 +1,11 @@
 package OOPs.Abstraction;
 
-public class Anstract {
+public class Abstract {
     public static void main(String[] args) {
         Child C = new Child();
         C.loan50k();
         C.loan25k();
         //Father f = new Father(); //Abstract class don't have any object
-
 
     }
 
